@@ -48,7 +48,17 @@ public:
       }// end else
     }// end insertAtFront
 
-    
+    void insertAtBack(const NODETYPE &value)
+    {
+      ListNode< NODETYPE > *newPtr = getNewNode(value); //new node
+      if(isEmpty())
+        firstPtr = lastPtr = newPtr;
+      else
+      {
+        lastPtr->nextPtr = newPtr; // update previous last node
+        lastPtr = newPtr; // new last node
+      }// end else
+    }// end insertAtBack
   }
 }; // end class List
 #endif

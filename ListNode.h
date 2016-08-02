@@ -22,7 +22,7 @@ public:
     } // end getData
 private:
   NODETYPE data;
-  ListNode< NODETYPE > *nextPtr; //next node in list
+  ListNode< NODETYPE > *nextPtr; //next node in lists
 
 }; // end class ListNode
 #endif
