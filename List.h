@@ -59,6 +59,25 @@ public:
         lastPtr = newPtr; // new last node
       }// end else
     }// end insertAtBack
+
+    // delete node from front of list
+    bool removeFromFront(NODETYPE &value)
+    {
+      if(isEmpty())
+        return false;
+      else
+      {
+        ListNode < NODETYPE > *tempPtr = firstPtr; // hold item to delete
+        if(firstPtr == lastPtr)
+          firstPtr = lastPtr = nullptr; // no nodes remaining
+        else
+          firstPtr = firstPtr->nextPtr; // point to previous 2nd node
+
+        value = tempPtr->data; // return data being removed
+        delete tempPtr; // reclaim previous front node
+        return true; // delete successful
+      } // end else
+    } // end removeFromFront
   }
 }; // end class List
 #endif
