@@ -58,3 +58,13 @@ void testList(List< T > &listObject, const string &typeName)
   } while(choice < 5); // end do...while
   cout << "End list test\n\n";
 }// end testList
+
+int main()
+{
+  // test List of int values
+  List< int > integerList;
+  testList(integerList, "integer");
+  // test List of double values
+  List< double > doubleList;
+  testList(doubleList, "double");
+}// end main
