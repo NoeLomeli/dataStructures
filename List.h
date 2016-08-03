@@ -11,14 +11,14 @@ class List
 {
 public:
   List() // default constructor
-    : fistPtr(nullptr), lastPtr(nullptr)
+    : firstPtr(nullptr), lastPtr(nullptr)
   {
     // empty body
   } // end list constructor
 
   ~List() // destructor
   {
-    if(!isEmpty) // list is not empty
+    if(!isEmpty()) // list is not empty
     {
       std::cout << "Destroying nodes...\n";
 
@@ -29,7 +29,7 @@ public:
       {
         tempPtr = currentPtr;
         std::cout << tempPtr->data << '\n';
-        currentPtr = currentPtr->next;
+        currentPtr = currentPtr->nextPtr;
         delete tempPtr;
       } // end while
     } //end if
@@ -41,7 +41,7 @@ public:
   {
     ListNode< NODETYPE > *newPtr = getNewNode(value); // new node
     if(isEmpty()) // list is empty
-      firstPtr = lastPtr = newPtr; new list has onlu one node
+      firstPtr = lastPtr = newPtr; //new list has onlu one node
     else
     {
       newPtr->nextPtr = firstPtr; // point new node to old 1st node
@@ -108,7 +108,7 @@ public:
   // is list empty
   bool isEmpty() const
   {
-    return firstPtr == nullptr
+    return firstPtr == nullptr;
   } // end isEmpty
 
   // display contents of list
@@ -132,7 +132,7 @@ private:
   ListNode< NODETYPE > *firstPtr; // pointer to first node
   ListNode< NODETYPE > *lastPtr; // pointer to last node
   //utility function to allocate new node
-  ListNode< NODETYPE > *getNewNode(const NODETYPE &value);
+  ListNode< NODETYPE > *getNewNode(const NODETYPE &value)
   {
     return new ListNode< NODETYPE > (value);
   }// end getNewNode

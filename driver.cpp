@@ -4,7 +4,7 @@
 
 #include <iostream>
 #include <string>
-#inlcude "List.h"
+#include "List.h"
 using namespace std;
 
 // display program instructions to user
@@ -24,12 +24,13 @@ void testList(List< T > &listObject, const string &typeName)
 {
   cout << "Testing a List of " << typeName << " values\n";
   instructions(); // display instructions
-  int choice;
+  int choice = 0;
   T value;
 
   do
   {
     cout << "? ";
+    cin >> choice;
     switch(choice)
     {
       case 1: // insert at beginning
@@ -55,7 +56,7 @@ void testList(List< T > &listObject, const string &typeName)
         listObject.print();
         break;
     }// end switch
-  } while(choice < 5); // end do...while
+  } while(choice != 5); // end do...while
   cout << "End list test\n\n";
 }// end testList
 
