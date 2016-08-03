@@ -105,5 +105,29 @@ public:
     }// end else
   }// end removeFromBack
 
+  // is list empty
+  bool isEmpty() const
+  {
+    return firstPtr == nullptr
+  } // end isEmpty
+
+  // display contents of list
+  void print() const
+  {
+    if(isEmpty())
+    {
+      std::cout << "The list is empty\n\n";
+      return;
+    }// end if
+    ListNode< NODETYPE > *currentPtr = firstPtr;
+    std::cout << "The list is: ";
+    while(currentPtr != nullptr) // get element data
+    {
+      std::cout << currentPtr->data << ' ';
+      currentPtr = currentPtr->nextPtr;
+    } // end while
+    std::cout << "\n\n";
+  }// end print
+
 }; // end class List
 #endif
