@@ -14,13 +14,13 @@ public:
   // push calls the List function insertAtFront
   void push(const STACKTYPE &data)
   {
-    insertAtFront(data);
+    this->insertAtFront(data);
   }// end push
 
   // pop calls the List function removeFromFront
   bool pop( STACKTYPE &data)
   {
-    return removeFromFront(data);
+    return this->removeFromFront(data);
   }// end pop
 
   // isStackEmpty calls the function isStackEmpty
