@@ -17,3 +17,44 @@ void instructions()
        << " 4 to delete from end of list\n"
        << " 5 to end list processing\n";
 }// end instructions
+
+// function to test a list
+template< typename T >
+void testList(List< T > &listObject, const string &typeName)
+{
+  cout << "Testing a List of " << typeName << " values\n";
+  instructions(); // display instructions
+  int choice;
+  T value;
+
+  do
+  {
+    cout << "? ";
+    switch(choice)
+    {
+      case 1: // insert at beginning
+        cout << "Enter " << typeName << ": ";
+        cin >> value;
+        listObject.insertAtFront(value);
+        listObject.print();
+        break;
+      case 2: // insert at end
+        cout << "Enter " << typeName << ": ";
+        cin >> value;
+        listObject.insertAtBack(value);
+        listObject.print();
+        break;
+      case 3: // remove from beginning
+        if(listObject.removeFromFront(value))
+          cout << value << " removed from list\n";
+        listObject.print();
+        break;
+      case 4: // remove from end
+        if(listObject.removeFromBack(value))
+          cout << value << " removed from list\n";
+        listObject.print();
+        break;
+    }// end switch
+  } while(choice < 5); // end do...while
+  cout << "End list test\n\n";
+}// end testList
