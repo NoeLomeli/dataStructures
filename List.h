@@ -128,6 +128,13 @@ public:
     } // end while
     std::cout << "\n\n";
   }// end print
-
+private:
+  ListNode< NODETYPE > *firstPtr; // pointer to first node
+  ListNode< NODETYPE > *lastPtr; // pointer to last node
+  //utility function to allocate new node
+  ListNode< NODETYPE > *getNewNode(const NODETYPE &value);
+  {
+    return new ListNode< NODETYPE > (value);
+  }// end getNewNode
 }; // end class List
 #endif
