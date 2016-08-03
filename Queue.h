@@ -13,13 +13,13 @@ public:
   //enqueue calls List member fuction insertAtBack
   void enqueue(const QUEUETYPE &data)
   {
-    insertAtBack(data);
+    this->insertAtBack(data);
   }// end function enqueue
 
   //dequeue calls List member function removeFromFront
   bool dequeue(QUEUETYPE &data)
   {
-    return removeFromFront(data);
+    return this->removeFromFront(data);
   }// end dequeue
 
   // isQueueEmpty calls List member function isEmpty
