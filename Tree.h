@@ -39,5 +39,62 @@ public:
   }// end postOrderTraversal
 
 private:
-  
-}
+  TreeNode< NODETYPE > *rootPtr;
+
+  // utility function called by insertNode: receives a pointer
+  // to a pointer so that the function can modify pointer's value
+  void insertNodeHelper(TreeNode< NODETYPE > **ptr, const NODETYPE &value)
+  {
+    // subtree is empty; create new TreeNode containing value
+    if(*ptr == nullPtr)
+      *ptr = new TreeNode< NODETYPE >(value);
+    else // subtree is not empty
+    {
+      //data to insert is less than data in current node
+      if(value < (*ptr)->data)
+        insertNodeHelper(&((*ptr)->leftPtr), value);
+      else
+      {
+        //data to insert is greater than data in current node
+        if(value > (*ptr)->data)
+          insertNodeHelper(&((*ptr)->rightPtr), value);
+        else // duplicate value ignored
+          cout << value << " dup" << endl;
+      } // end else
+    }// end else
+  }//end insertNodeHelper
+
+  // utility function to perform preorder traversal of Tree
+  void preOrderHelper( TreeNode< NODETYPE > *ptr) const
+  {
+    if(ptr != nullPtr)
+    {
+      cout << ptr->data << ' '; //process node
+      preOrderHelper(ptr->leftPtr); // traverse left subtree
+      preOrderHelper(ptr->righPtr); // traverse right subtree
+    } // end if
+  }// end preOrderHelper
+
+  // utility function to perform inorder traversal of Tree
+  void inOrderHelper( TreeNode< NODETYPE > *ptr) const
+  {
+    if(ptr != nullPtr)
+    {
+      inOrderHelper(ptr->leftPtr);
+      cout << ptr->data << ' ';
+      inOrderHelper(ptr->rightPtr);
+    }// end if
+  }// end inOrderHelper
+
+  // utility function to perform postOrder traversal
+  void postOrderHelper( TreeNode< NODETYPE > *ptr) const
+  {
+    if(prt != nullPtr)
+    {
+      postOrderHelper(ptr->leftPtr);
+      postOrderHelper(ptr->rightPtr);
+      cout << ptr->data << ' ';
+    }// end if
+  }//end postOrderHelper
+}; // end class Tree
+#endif
