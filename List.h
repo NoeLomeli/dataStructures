@@ -34,50 +34,76 @@ public:
       } // end while
     } //end if
     std::cout << "All nodes destroyed \n\n";
+  }// end list destructor
 
-    // insert node at front of list
-    void insertAtFront(const NODETYPE &value)
+  // insert node at front of list
+  void insertAtFront(const NODETYPE &value)
+  {
+    ListNode< NODETYPE > *newPtr = getNewNode(value); // new node
+    if(isEmpty()) // list is empty
+      firstPtr = lastPtr = newPtr; new list has onlu one node
+    else
     {
-      ListNode< NODETYPE > *newPtr = getNewNode(value); // new node
-      if(isEmpty()) // list is empty
-        firstPtr = lastPtr = newPtr; new list has onlu one node
+      newPtr->nextPtr = firstPtr; // point new node to old 1st node
+      firstPtr = newPtr; // point firstPtr at new node
+    }// end else
+  }// end insertAtFront
+
+  void insertAtBack(const NODETYPE &value)
+  {
+    ListNode< NODETYPE > *newPtr = getNewNode(value); //new node
+    if(isEmpty())
+      firstPtr = lastPtr = newPtr;
+    else
+    {
+      lastPtr->nextPtr = newPtr; // update previous last node
+      lastPtr = newPtr; // new last node
+    }// end else
+  }// end insertAtBack
+
+  // delete node from front of list
+  bool removeFromFront(NODETYPE &value)
+  {
+    if(isEmpty())
+      return false;
+    else
+    {
+      ListNode < NODETYPE > *tempPtr = firstPtr; // hold item to delete
+      if(firstPtr == lastPtr)
+        firstPtr = lastPtr = nullptr; // no nodes remaining
+      else
+        firstPtr = firstPtr->nextPtr; // point to previous 2nd node
+
+      value = tempPtr->data; // return data being removed
+      delete tempPtr; // reclaim previous front node
+      return true; // delete successful
+    } // end else
+  } // end removeFromFront
+
+  //delete node from back of list
+  bool removeFromBack(NODETYPE &value)
+  {
+    if(isEmpty())
+      return false; // delete unsuccessful
+    else
+    {
+      ListNode< NODETYPE > *tempPtr = lastPtr; // hold item to delete
+      if(firstPtr == lastPtr) //list has one element
+        firstPtr = lastPtr = nullptr; // no nodes remain after removal
       else
       {
-        newPtr->nextPtr = firstPtr; // point new node to old 1st node
-        firstPtr = newPtr; // point firstPtr at new node
-      }// end else
-    }// end insertAtFront
-
-    void insertAtBack(const NODETYPE &value)
-    {
-      ListNode< NODETYPE > *newPtr = getNewNode(value); //new node
-      if(isEmpty())
-        firstPtr = lastPtr = newPtr;
-      else
-      {
-        lastPtr->nextPtr = newPtr; // update previous last node
-        lastPtr = newPtr; // new last node
-      }// end else
-    }// end insertAtBack
-
-    // delete node from front of list
-    bool removeFromFront(NODETYPE &value)
-    {
-      if(isEmpty())
-        return false;
-      else
-      {
-        ListNode < NODETYPE > *tempPtr = firstPtr; // hold item to delete
-        if(firstPtr == lastPtr)
-          firstPtr = lastPtr = nullptr; // no nodes remaining
-        else
-          firstPtr = firstPtr->nextPtr; // point to previous 2nd node
-
-        value = tempPtr->data; // return data being removed
-        delete tempPtr; // reclaim previous front node
-        return true; // delete successful
+        ListNode < NODETYPE > *currentPtr = firstPtr;
+        // locate second-to-last element
+        while(currentPtr->nextPtr != lastPtr)
+          currentPtr = currentPtr->nextPtr; //move to next node
+        lastPtr = currentPtr; // remove last node
+        currentPtr->nextPtr = nullptr; // this is now the last node
       } // end else
-    } // end removeFromFront
-  }
+      value = tempPtr->data; //return value from old last node
+      delete tempPtr; // reclaim former last node
+      return true; // delete successful
+    }// end else
+  }// end removeFromBack
+
 }; // end class List
 #endif
