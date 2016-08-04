@@ -14,7 +14,7 @@ class TreeNode
   friend class Tree< NODETYPE >;
 public:
   //constructor
-  TreeNode(const NODETYPE &d){leftPtr = nullPtr, data = d, rightPtr = nullPtr;}
+  TreeNode(const NODETYPE &d){leftPtr = nullptr, data = d, rightPtr = nullptr;}
 
   //return copy of node's data
   NODETYPE getData() const

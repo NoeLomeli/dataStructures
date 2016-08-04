@@ -12,7 +12,7 @@ template< typename NODETYPE > class Tree
 {
 public:
   //constructor
-  Tree(){rootPtr = nullPtr;}
+  Tree(){rootPtr = nullptr;}
 
   // insert node in Tree
   void insertNode(const NODETYPE &value)
@@ -46,7 +46,7 @@ private:
   void insertNodeHelper(TreeNode< NODETYPE > **ptr, const NODETYPE &value)
   {
     // subtree is empty; create new TreeNode containing value
-    if(*ptr == nullPtr)
+    if(*ptr == nullptr)
       *ptr = new TreeNode< NODETYPE >(value);
     else // subtree is not empty
     {
@@ -59,7 +59,7 @@ private:
         if(value > (*ptr)->data)
           insertNodeHelper(&((*ptr)->rightPtr), value);
         else // duplicate value ignored
-          cout << value << " dup" << endl;
+          std::cout << value << " dup" << std::endl;
       } // end else
     }// end else
   }//end insertNodeHelper
@@ -67,21 +67,21 @@ private:
   // utility function to perform preorder traversal of Tree
   void preOrderHelper( TreeNode< NODETYPE > *ptr) const
   {
-    if(ptr != nullPtr)
+    if(ptr != nullptr)
     {
-      cout << ptr->data << ' '; //process node
+      std::cout << ptr->data << ' '; //process node
       preOrderHelper(ptr->leftPtr); // traverse left subtree
-      preOrderHelper(ptr->righPtr); // traverse right subtree
+      preOrderHelper(ptr->rightPtr); // traverse right subtree
     } // end if
   }// end preOrderHelper
 
   // utility function to perform inorder traversal of Tree
   void inOrderHelper( TreeNode< NODETYPE > *ptr) const
   {
-    if(ptr != nullPtr)
+    if(ptr != nullptr)
     {
       inOrderHelper(ptr->leftPtr);
-      cout << ptr->data << ' ';
+      std::cout << ptr->data << ' ';
       inOrderHelper(ptr->rightPtr);
     }// end if
   }// end inOrderHelper
@@ -89,11 +89,11 @@ private:
   // utility function to perform postOrder traversal
   void postOrderHelper( TreeNode< NODETYPE > *ptr) const
   {
-    if(prt != nullPtr)
+    if(ptr != nullptr)
     {
       postOrderHelper(ptr->leftPtr);
       postOrderHelper(ptr->rightPtr);
-      cout << ptr->data << ' ';
+      std::cout << ptr->data << ' ';
     }// end if
   }//end postOrderHelper
 }; // end class Tree
