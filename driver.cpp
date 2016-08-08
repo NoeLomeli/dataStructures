@@ -68,4 +68,6 @@ int main()
   // test List of double values
   List< double > doubleList;
   testList(doubleList, "double");
+  List< string > stringList;
+  testList(stringList, "string");
 }// end main
