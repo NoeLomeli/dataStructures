@@ -37,52 +37,59 @@ void convertInfixToPostfix()
   std::cout << "Enter an arithmetic expression: ";
   std::getline(std::cin, infix);
   infix += ')'; // append a right parenthesis to the expression
-
+  int i = 0;
+  char popChar;
+  char operator1;
+  char operator2;
   while(!charStack.isStackEmpty())
   {
-    int i = 0;
-    char popChar;
-    char operator1;
-    char operator2;
-
+    if(infix[i] == ' ')
+      i++;
     if(isdigit(infix[i]))
     {
       postfix += infix[i]; // digits get copied to postfix
-      i++;
     }
     if(infix[i] == '(')
     {
       charStack.push('(');
-      i++;
     }
     if(isOperator(infix[i]))
     {
-      if(isOperator(operator2))
+      operator1 = charStack.topElement();
+      operator2 = infix[i];
+
+      if(!isOperator(operator1)) // stack does not contain an operator
       {
-        operator1 = charStack.topElement();
-        operator2 = infix[i];
-
-
-        if(precedence(operator1, operator2))
-          postfix += charStack.pop(popChar);
+        charStack.push(operator2);
       }
       else
+      {
+        // determine if the operator on the stack is greater than the one on infix variable
+        if(precedence(operator1, operator2))
+        {
+          charStack.pop(popChar); // add popped element to postfix
+          postfix += popChar;
+          charStack.push(operator2);
+        }
+        else
         charStack.push(operator2);
-      i++;
+      }
     }
     if(infix[i] == ')')
     {
       while(charStack.topElement() != '(')
       {
-        postfix += charStack.pop(popChar);
         charStack.pop(popChar);
-      }
-      i++;
-    }
-    else
-      cout << "invalid input" << endl; 
-    cout << "i: " << i << endl;
+        cout << "\npopChar " << popChar << endl;
+        postfix += popChar;
 
+      }
+      charStack.pop(popChar);
+    }
+
+    cout << "i: " << i << endl;
+    cout << "post: " << postfix << endl;
+    i++;
   }  // end while
 
   return;

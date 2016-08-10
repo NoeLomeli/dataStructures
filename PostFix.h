@@ -19,16 +19,9 @@ public:
   // topElement returns the top value of the stack without popping the stack
   STACKTYPE topElement() const
   {
-    if(isStackEmpty())
-    {
-      std::cout << "Stack is empty" << std::endl;
-      return ' ';
-    }
-    else
-    {
-      std::cout << "The top element is: ";
+      std::cout << "The top element is: " << this->top() << std::endl;
       return this->top();
-    }
+
   }// end topElement
 
   // push calls the List function insertAtFront
@@ -55,7 +48,7 @@ public:
     this->print();
   }// end printStack
 
-  
+
 private:
   std::string infix;
   std::string postfix;
