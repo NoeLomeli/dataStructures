@@ -11,24 +11,25 @@
 
 #include "List.h"
 #include <string>
+#include <iostream>
 template< typename STACKTYPE >
 class Postfix : private List< STACKTYPE >
 {
 public:
-  Postfix(){infix = "", postfix = "";} // default constructor
-
-  void convertToPostfix()
+  // topElement returns the top value of the stack without popping the stack
+  STACKTYPE topElement() const
   {
-    std::cout << " Enter an arithmetic expression: ";
-    std::cin >> infix;
-
-  }
-
-  STACKTYPE topElement()
-  {
-    std::cout << "The top element is: ";
-    return this->top();
-  }
+    if(isStackEmpty())
+    {
+      std::cout << "Stack is empty" << std::endl;
+      return ' ';
+    }
+    else
+    {
+      std::cout << "The top element is: ";
+      return this->top();
+    }
+  }// end topElement
 
   // push calls the List function insertAtFront
   void push(const STACKTYPE &data)
@@ -53,6 +54,8 @@ public:
   {
     this->print();
   }// end printStack
+
+  
 private:
   std::string infix;
   std::string postfix;
