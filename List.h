@@ -128,6 +128,12 @@ public:
     } // end while
     std::cout << "\n\n";
   }// end print
+
+  NODETYPE top() const
+  {
+    ListNode< NODETYPE > *currentPtr = firstPtr;
+    return currentPtr->data;
+  }// end top
 private:
   ListNode< NODETYPE > *firstPtr; // pointer to first node
   ListNode< NODETYPE > *lastPtr; // pointer to last node

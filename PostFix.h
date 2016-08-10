@@ -12,16 +12,24 @@
 #include "List.h"
 #include <string>
 template< typename STACKTYPE >
-class Stack : private List< STACKTYPE >
+class Postfix : private List< STACKTYPE >
 {
 public:
-  postfix(){infix = "", postfix = "";} // default constructor
+  Postfix(){infix = "", postfix = "";} // default constructor
 
-  convertToPostfix()
+  void convertToPostfix()
   {
-    std::cout " Enter an arithmetic expression: ";
-    cin >> infix;
+    std::cout << " Enter an arithmetic expression: ";
+    std::cin >> infix;
+
   }
+
+  STACKTYPE topElement()
+  {
+    std::cout << "The top element is: ";
+    return this->top();
+  }
+
   // push calls the List function insertAtFront
   void push(const STACKTYPE &data)
   {
@@ -46,7 +54,7 @@ public:
     this->print();
   }// end printStack
 private:
-  string infix;
-  string postfix;
+  std::string infix;
+  std::string postfix;
 }; // end class Stack
 #endif
