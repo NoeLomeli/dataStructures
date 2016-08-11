@@ -26,7 +26,14 @@ bool isOperator(char op);
 // or equal to the second character, and if so, it returns true
 bool precedence(char op1, char op2);
 
+// Two int variables and a character are passed as arguments into function
+// The character will indicate which operation is being called to process
+// the two ints
 int calculator(int first, int second, char operator1);
+
+// Evaluates a postfix expression that was previously validated
+// and returns the result.
+int postEvaluation(string expression);
 
 int main()
 {
@@ -175,3 +182,42 @@ int calculator(int first, int second, char operator1)
 
   return calculation;
 }// end calculator
+
+int postEvaluation(string expression)
+{
+  int length = expression.length();
+  Stack< int > intStack; // create a Stack of ints
+  int popInt = 0;
+  int result = 0;
+  int x = 0;
+  int y = 0;
+  char operatorA = '';
+
+  // Analize the expression from left to right
+  for(int i = 0; i < length; i++)
+  {
+    // if the current character is a digit
+    if(isdigit(expression[i]))
+    {
+      //convert current character into an int
+      intStack.push(atoi(expression[i]))
+    }
+    else // if the character is an operator
+    {
+      intStack.pop(popInt);
+      x = popInt;
+      intStack.pop(popInt);
+      y = popInt;
+      operatorA = expression[i];
+      if(operatorA == '/' || operatorA == '-')
+        result = calculate(y, x, operatorA)
+      else
+        result = calculate(x, y, operatorA)
+    }// end else
+  }// end for
+
+  //pop the top element on the stack.  This is the result of the
+  //postfix expression
+  intStack.pop(popInt);
+  return popInt;
+}// end postEvaluation
