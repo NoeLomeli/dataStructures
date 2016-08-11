@@ -10,7 +10,6 @@
 #include <iostream>
 #include <stack>
 #include <cmath> // pow
-#include <cstdlib> // atoi
 using namespace std;
 
 // This is the main function that will call all other functions in order
@@ -212,7 +211,7 @@ int postEvaluation(string expression)
       intStack.pop(popInt);
       y = popInt;
       operatorA = expression[i];
-      if(operatorA == '/' || operatorA == '-')
+      if(operatorA == '/' || operatorA == '-' || operatorA == '^' || operatorA == '%')
         result = calculator(y, x, operatorA);
       else
         result = calculator(x, y, operatorA);
