@@ -3,11 +3,13 @@
 // Infix-to-Postfix Conversion Program
 // Summary: The user will input an arithmetic expression in infix notation
 // format. This program will convert the expression into postfix notation
-// and return it as a string value
+// and return it as a string value to be evaluated and return the correct result
+// of the expression.
 
 #include "Postfix.h"
 #include <iostream>
 #include <stack>
+#include <stdlib> // atoi
 using namespace std;
 
 // This is the main function that will call all other functions in order
@@ -23,6 +25,8 @@ bool isOperator(char op);
 // determines whether the precedence of first character is greater than
 // or equal to the second character, and if so, it returns true
 bool precedence(char op1, char op2);
+
+int calculator(int first, int second, char operator1);
 
 int main()
 {
@@ -152,3 +156,22 @@ bool isValid(string expression, int size)
   }
   return true;
 } // end isValid
+
+int calculator(int first, int second, char operator1)
+{
+  int calculation = 0;
+  if(operator1 == '/')
+    calculation = first / second;
+  if(operator1 == '*')
+    calculation = first * second;
+  if(operator1 == '^')
+    calculation = pow(first, second);
+  if(operator1 == '%')
+    calculation = first % second;
+  if(operator1 == '+')
+    calculation = first + second;
+  if(operator1 == '-')
+    calculation = first - second;
+
+  return calculation;
+}// end calculator
