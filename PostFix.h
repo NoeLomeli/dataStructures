@@ -19,7 +19,6 @@ public:
   // topElement returns the top value of the stack without popping the stack
   STACKTYPE topElement() const
   {
-      std::cout << "The top element is: " << this->top() << std::endl;
       return this->top();
 
   }// end topElement

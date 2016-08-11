@@ -41,6 +41,7 @@ int main()
   string conversion;
   conversion = convertInfixToPostfix();
   cout << "Conversion is: " << conversion << endl;
+  cout << "The result is: " << postEvaluation(conversion) << endl;
 
 } // end main
 
@@ -215,6 +216,7 @@ int postEvaluation(string expression)
         result = calculator(y, x, operatorA);
       else
         result = calculator(x, y, operatorA);
+      intStack.push(result);
     }// end else
   }// end for
 
