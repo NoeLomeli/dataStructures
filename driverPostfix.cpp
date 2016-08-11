@@ -12,7 +12,7 @@ using namespace std;
 
 // This is the main function that will call all other functions in order
 // to convert the expression from infix to postfix
-void convertInfixToPostfix();
+string convertInfixToPostfix();
 
 // determines if the expression being input by the user is valid
 bool isValid(string expression, int size);
@@ -26,11 +26,13 @@ bool precedence(char op1, char op2);
 
 int main()
 {
-  convertInfixToPostfix();
+  string conversion;
+  conversion = convertInfixToPostfix();
+  cout << "Conversion is: " << conversion << endl;
 
 } // end main
 
-void convertInfixToPostfix()
+string convertInfixToPostfix()
 {
   string infix = "";
   string postfix = "";
@@ -44,9 +46,9 @@ void convertInfixToPostfix()
   // test to see if the expression is valid
   length = infix.length();
 
-  if(isValid(infix, length))
+  if(!isValid(infix, length))
   {
-    cout << "test" << endl;
+    cout << infix << " Is an invalid expression. Program terminated." << endl;
     exit(0);
   }
 
@@ -102,7 +104,7 @@ void convertInfixToPostfix()
     i++;
   }  // end while
 
-  return;
+  return postfix;
 }// end convertInfixToPostfix
 
 bool isOperator(char op)
@@ -137,7 +139,8 @@ bool isValid(string expression, int size)
 {
   for(int i = 0; i < size; i++)
   {
-    if(isdigit(expression[i]) || isOperator(expression[i]) || expression[i] == ' ')
+    if(isdigit(expression[i]) || isOperator(expression[i])
+      || expression[i] == ' ' || expression[i] == '(' || expression[i] == ')')
     {
       i++;
     }
