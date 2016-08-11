@@ -9,7 +9,8 @@
 #include "Postfix.h"
 #include <iostream>
 #include <stack>
-#include <stdlib> // atoi
+#include <cmath> // pow
+#include <cstdlib> // atoi
 using namespace std;
 
 // This is the main function that will call all other functions in order
@@ -186,12 +187,12 @@ int calculator(int first, int second, char operator1)
 int postEvaluation(string expression)
 {
   int length = expression.length();
-  Stack< int > intStack; // create a Stack of ints
+  Postfix< int > intStack; // create a Stack of ints
   int popInt = 0;
   int result = 0;
   int x = 0;
   int y = 0;
-  char operatorA = '';
+  char operatorA = ' ';
 
   // Analize the expression from left to right
   for(int i = 0; i < length; i++)
@@ -200,7 +201,8 @@ int postEvaluation(string expression)
     if(isdigit(expression[i]))
     {
       //convert current character into an int
-      intStack.push(atoi(expression[i]))
+      int converted = expression[i] - '0';
+      intStack.push(converted);
     }
     else // if the character is an operator
     {
@@ -210,9 +212,9 @@ int postEvaluation(string expression)
       y = popInt;
       operatorA = expression[i];
       if(operatorA == '/' || operatorA == '-')
-        result = calculate(y, x, operatorA)
+        result = calculator(y, x, operatorA);
       else
-        result = calculate(x, y, operatorA)
+        result = calculator(x, y, operatorA);
     }// end else
   }// end for
 
