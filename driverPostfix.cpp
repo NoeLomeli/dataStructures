@@ -14,6 +14,9 @@ using namespace std;
 // to convert the expression from infix to postfix
 void convertInfixToPostfix();
 
+// determines if the expression being input by the user is valid
+bool isValid(string expression, int size);
+
 // determines whether the character passed as an argument is an operator
 bool isOperator(char op);
 
@@ -31,11 +34,23 @@ void convertInfixToPostfix()
 {
   string infix = "";
   string postfix = "";
+  int length = 0;
   Postfix< char > charStack; // create Stack of chars
   charStack.push('(');
 
   std::cout << "Enter an arithmetic expression: ";
   std::getline(std::cin, infix);
+
+  // test to see if the expression is valid
+  length = infix.length();
+
+  if(isValid(infix, length))
+  {
+    cout << "test" << endl;
+    exit(0);
+  }
+
+
   infix += ')'; // append a right parenthesis to the expression
   int i = 0;
   char popChar;
@@ -60,9 +75,9 @@ void convertInfixToPostfix()
 
       if(!isOperator(operator1)) // stack does not contain an operator
       {
-        charStack.push(operator2);
+        charStack.push(operator2); // push the operator from infix to the stack
       }
-      else
+      else // if stack contains an operator
       {
         // determine if the operator on the stack is greater than the one on infix variable
         if(precedence(operator1, operator2))
@@ -80,15 +95,10 @@ void convertInfixToPostfix()
       while(charStack.topElement() != '(')
       {
         charStack.pop(popChar);
-        cout << "\npopChar " << popChar << endl;
         postfix += popChar;
-
       }
-      charStack.pop(popChar);
+      charStack.pop(popChar); // this will pop the '(' on the stack
     }
-
-    cout << "i: " << i << endl;
-    cout << "post: " << postfix << endl;
     i++;
   }  // end while
 
@@ -122,3 +132,20 @@ bool precedence(char op1, char op2)
   return isGreater;
 
 }//end precedence
+
+bool isValid(string expression, int size)
+{
+  for(int i = 0; i < size; i++)
+  {
+    if(isdigit(expression[i]) || isOperator(expression[i]) || expression[i] == ' ')
+    {
+      i++;
+    }
+    else
+    {
+      cout << expression[i] << " is an invalid element." << endl;
+      return false;
+    }
+  }
+  return true;
+} // end isValid
