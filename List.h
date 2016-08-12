@@ -36,12 +36,49 @@ public:
     std::cout << "All nodes destroyed \n\n";
   }// end list destructor
 
+  // insert node anywhere on the list
+  void insert(const NODETYPE &value)
+  {
+    ListNode< NODETYPE > *newPtr = getNewNode(value); // create new node
+    // case 1 - Empty list
+    if(isEmpty())
+      firstPtr = lastPtr = newPtr; // new list has only one node
+    else
+    {
+      ListNode< NODETYPE > *currentPtr = firstPtr;
+      ListNode< NODETYPE > *trailPtr = nullptr;
+      // traverse the list to find insert location
+      while(currentPtr != nullptr)
+      {
+        if(currentPtr->data >= newPtr->data)
+          break;
+        else
+        {
+          trailPtr = currentPtr;
+          currentPtr = currentPtr->nextPtr;
+        }// end else
+      }// end while
+      // Case 2 - Insert at head(not empty)
+      if(currentPtr == firstPtr)
+      {
+        newPtr->nextPtr = firstPtr;
+        firstPtr = newPtr;
+      }// end if
+      else
+      {
+        //case 3 - Insert after the head(not empty)
+        newPtr->nextPtr = currentPtr;
+        trailPtr->nextPtr = newPtr;
+      }// end else
+    }// end else
+  }// end insert
+
   // insert node at front of list
   void insertAtFront(const NODETYPE &value)
   {
     ListNode< NODETYPE > *newPtr = getNewNode(value); // new node
     if(isEmpty()) // list is empty
-      firstPtr = lastPtr = newPtr; //new list has onlu one node
+      firstPtr = lastPtr = newPtr; //new list has only one node
     else
     {
       newPtr->nextPtr = firstPtr; // point new node to old 1st node
